@@ -1,0 +1,20 @@
+# @three-ws/herald-mcp
+
+> Let an AI agent tell its human something in person: a 3D character walks onto the browser tab they have open and says it out loud. Announce a line, report a finished task with the right urgency, or check the rail. Account-scoped over the live three.ws API via a Bearer API key.
+
+@three-ws/herald-mcp is a Model Context Protocol server from three.ws. Install: `npx -y @three-ws/herald-mcp`.
+
+## Docs
+
+- [README](https://github.com/nirholas/herald-mcp/blob/main/README.md): install, configuration, full reference
+- [Documentation site](https://nirholas.github.io/herald-mcp/): the README as a web page
+- [Full text for LLMs](https://nirholas.github.io/herald-mcp/llms-full.txt): README inlined
+- [AGENTS.md](https://github.com/nirholas/herald-mcp/blob/main/AGENTS.md): guidance for coding agents
+
+## Project
+
+- [Source](https://github.com/nirholas/herald-mcp)
+- [npm](https://www.npmjs.com/package/@three-ws/herald-mcp)
+- [three.ws](https://three.ws): the platform this is part of
+- [Issues](https://github.com/nirholas/herald-mcp/issues)
+- [MCP Registry](https://registry.modelcontextprotocol.io/?q=io.github.nirholas%2Fherald-mcp)

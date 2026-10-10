@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@three-ws/herald-mcp: Let an AI agent tell its human something in person</title>
+<meta name="description" content="Let an AI agent tell its human something in person: a 3D character walks onto the browser tab they have open and says it out loud. Announce a line, report a finished task with the right urgency, or check the rail. Account-scoped over the live three.ws API via a Bearer API key.">
+<link rel="canonical" href="https://nirholas.github.io/herald-mcp/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="three.ws">
+<meta property="og:title" content="@three-ws/herald-mcp">
+<meta property="og:description" content="Let an AI agent tell its human something in person: a 3D character walks onto the browser tab they have open and says it out loud. Announce a line, report a finished task with the right urgency, or check the rail. Account-scoped over the live three.ws API via a Bearer API key.">
+<meta property="og:url" content="https://nirholas.github.io/herald-mcp/">
+<meta property="og:image" content="https://nirholas.github.io/herald-mcp/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@three-ws/herald-mcp">
+<meta name="twitter:description" content="Let an AI agent tell its human something in person: a 3D character walks onto the browser tab they have open and says it out loud. Announce a line, report a finished task with the right urgency, or check the rail. Account-scoped over the live three.ws API via a Bearer API key.">
+<meta name="twitter:image" content="https://nirholas.github.io/herald-mcp/og.png">
+<meta name="keywords" content="mcp, three.ws, herald, notifications, avatar, agent, tts, alerts, model-context-protocol, mcp-server, ai-agents">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="icon" href="https://three.ws/three-ws-mcp-icon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"@three-ws/herald-mcp","description":"Let an AI agent tell its human something in person: a 3D character walks onto the browser tab they have open and says it out loud. Announce a line, report a finished task with the right urgency, or check the rail. Account-scoped over the live three.ws API via a Bearer API key.","codeRepository":"https://github.com/nirholas/herald-mcp","programmingLanguage":"JavaScript","license":"https://spdx.org/licenses/Apache-2.0.html","version":"0.1.0","url":"https://nirholas.github.io/herald-mcp/","author":{"@type":"Organization","name":"three.ws","url":"https://three.ws"},"keywords":"mcp, three.ws, herald, notifications, avatar, agent, tts, alerts, model-context-protocol, mcp-server, ai-agents"}</script>
+<style>:root{--bg:#fff;--fg:#111418;--mut:#586069;--line:#e3e6ea;--acc:#2563eb;--code:#f4f6f8;--card:#fafbfc}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d10;--fg:#e8eaed;--mut:#9aa3ad;--line:#232830;--acc:#6ea0ff;--code:#14181d;--card:#10141a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc)}a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+header.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.bar nav{margin-left:auto;display:flex;gap:16px;font-size:14px}
+.bar nav a{color:var(--mut);text-decoration:none;transition:color .15s}.bar nav a:hover{color:var(--fg)}
+.hero{max-width:1100px;margin:0 auto;padding:48px 16px 24px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:70ch;font-size:18px;margin:0 0 24px}
+.install{display:flex;align-items:center;gap:8px;max-width:620px;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:6px 6px 6px 14px}
+.install code{flex:1;overflow-x:auto;white-space:nowrap;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}
+.install button{border:0;background:var(--acc);color:#fff;border-radius:7px;padding:8px 14px;font:600 13px system-ui;cursor:pointer;transition:transform .12s,opacity .12s}
+.install button:hover{opacity:.9}.install button:active{transform:scale(.96)}
+.cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.cta a{padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--fg);transition:border-color .15s,transform .15s}
+.cta a:hover{border-color:var(--acc);transform:translateY(-1px)}.cta a.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.layout{max-width:1100px;margin:0 auto;padding:8px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px}
+@media(max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+.toc{position:sticky;top:76px;align-self:start;font-size:14px;border-left:1px solid var(--line);padding-left:16px}
+.toc p{margin:0 0 8px;font-weight:700;color:var(--mut);text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:6px 0}.toc a{color:var(--mut);text-decoration:none}.toc a:hover{color:var(--fg)}
+main{min-width:0;overflow-wrap:anywhere}main pre code{overflow-wrap:normal}main img{max-width:100%;height:auto}
+main h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+.anchor{margin-left:-1.1em;padding-right:.4em;text-decoration:none;opacity:0;color:var(--mut)}h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.5}
+code{font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:.15em .35em;border-radius:5px}pre code{background:none;padding:0}
+table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}th{background:var(--card)}
+blockquote{margin:1em 0;padding:.2em 1em;border-left:4px solid var(--line);color:var(--mut)}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+.foot-in{max-width:1100px;margin:0 auto;padding:24px 16px;display:flex;gap:16px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+<a class="brand" href="https://nirholas.github.io/herald-mcp/">@three-ws/herald-mcp</a>
+<nav aria-label="Project links"><a href="https://github.com/nirholas/herald-mcp">GitHub</a><a href="https://www.npmjs.com/package/@three-ws/herald-mcp">npm</a><a href="llms.txt">llms.txt</a><a href="https://three.ws">three.ws</a></nav>
+</div></header>
+<section class="hero">
+<h1>@three-ws/herald-mcp</h1>
+<p>Let an AI agent tell its human something in person: a 3D character walks onto the browser tab they have open and says it out loud. Announce a line, report a finished task with the right urgency, or check the rail. Account-scoped over the live three.ws API via a Bearer API key.</p>
+<div class="install" role="group" aria-label="Install command"><code>npx -y @three-ws/herald-mcp</code><button type="button" data-copy="npx -y @three-ws/herald-mcp">Copy</button></div>
+<div class="cta"><a class="pri" href="https://github.com/nirholas/herald-mcp">View on GitHub</a><a href="https://github.com/nirholas/herald-mcp/stargazers">Star the repo</a><a href="https://registry.modelcontextprotocol.io/?q=io.github.nirholas%2Fherald-mcp">MCP Registry</a></div>
+</section>
+<div class="layout">
+<main id="content"><h1>@three-ws/herald-mcp</h1>
+<p><strong>Let your agent tell you something in person.</strong></p>
+<p>An MCP server with one idea behind it: when an agent finishes something that
+mattered, or gets stuck, it should not add a line to a log you will never scroll
+back to. It should walk up to you and say so.</p>
+<p>Wire this in, and it does. Your own 3D companion appears in the corner of
+whatever browser tab you have open, gestures, and says the line out loud, with a
+link to click through.</p>
+<pre><code>you: run the migration, then the backfill, and tell me when it&#39;s done
+agent: [runs for 22 minutes]
+       [calls announce_result: task &quot;the backfill&quot;, outcome succeeded, 1320s]
+your browser: your avatar walks on: &quot;the backfill finished in 22m&quot;
+</code></pre>
+<h2 id="tools"><a class="anchor" href="#tools" aria-label="Link to this section">#</a>Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>announce</code></td>
+<td>Say one line, with importance (0-100), tone, a gesture, and an optional link.</td>
+</tr>
+<tr>
+<td><code>announce_result</code></td>
+<td>Report a finished task. The urgency is chosen from the outcome, so a failure cuts through quiet hours and a success does not.</td>
+</tr>
+<tr>
+<td><code>check_rail</code></td>
+<td>Prove the key and the rail work, without interrupting anybody (queues at importance 0, which every client drops).</td>
+</tr>
+</tbody></table>
+<h2 id="install"><a class="anchor" href="#install" aria-label="Link to this section">#</a>Install</h2>
+<pre><code class="language-sh">npx -y @three-ws/herald-mcp
+</code></pre>
+<p>Claude Code:</p>
+<pre><code class="language-sh">claude mcp add herald -e THREE_WS_API_KEY=sk_live_... -- npx -y @three-ws/herald-mcp
+</code></pre>
+<p>Claude Desktop / Cursor (<code>mcp.json</code>):</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;herald&quot;: {
+      &quot;command&quot;: &quot;npx&quot;,
+      &quot;args&quot;: [&quot;-y&quot;, &quot;@three-ws/herald-mcp&quot;],
+      &quot;env&quot;: { &quot;THREE_WS_API_KEY&quot;: &quot;sk_live_...&quot; }
+    }
+  }
+}
+</code></pre>
+<h2 id="the-key"><a class="anchor" href="#the-key" aria-label="Link to this section">#</a>The key</h2>
+<p>Create one at <a href="https://three.ws/dashboard/developers">three.ws/dashboard/developers</a>
+with the <strong><code>herald:announce</code></strong> scope, and put it in <code>THREE_WS_API_KEY</code>.</p>
+<p>An announcement is always delivered to <strong>the key owner&#39;s own</strong> live sessions.
+There is no recipient parameter: this server cannot be pointed at anybody else,
+so the worst a leaked key can do is annoy the person who leaked it. Revoke it in
+the same place.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Required</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>THREE_WS_API_KEY</code></td>
+<td>yes</td>
+<td></td>
+<td>API key with <code>herald:announce</code>, or an OAuth access token. Aliases: <code>THREE_WS_TOKEN</code>, <code>THREE_WS_BEARER</code>.</td>
+</tr>
+<tr>
+<td><code>THREE_WS_BASE</code></td>
+<td>no</td>
+<td><code>https://three.ws</code></td>
+<td>Override for self-hosting or a preview deployment.</td>
+</tr>
+<tr>
+<td><code>THREE_WS_TIMEOUT_MS</code></td>
+<td>no</td>
+<td><code>20000</code></td>
+<td>Per-request timeout.</td>
+</tr>
+</tbody></table>
+<h2 id="when-to-use-it-and-when-not-to"><a class="anchor" href="#when-to-use-it-and-when-not-to" aria-label="Link to this section">#</a>When to use it (and when not to)</h2>
+<p>Announcements are scarce on purpose. The receiving client applies an importance
+floor, a rate limit, dedupe, quiet hours, and a freshness window, so anything
+that does not clear the bar is dropped rather than queued. That is the feature:
+an interruption only works while it is rare.</p>
+<p>Good: a long job finished, a job failed, a decision is needed, something broke,
+money moved.</p>
+<p>Bad: progress updates, &quot;starting step 3 of 7&quot;, anything the person can read
+later. Those belong in the notification inbox
+(<a href="https://www.npmjs.com/package/@three-ws/notifications-mcp">@three-ws/notifications-mcp</a>).</p>
+<p>If nothing is open to hear it, the line expires in about five minutes. The rail
+is a live channel, not an archive.</p>
+<h2 id="example-calls"><a class="anchor" href="#example-calls" aria-label="Link to this section">#</a>Example calls</h2>
+<pre><code class="language-jsonc">// something broke, and it should wake somebody up
+{ &quot;name&quot;: &quot;announce&quot;, &quot;arguments&quot;: {
+    &quot;text&quot;: &quot;The payments worker has been failing for 10 minutes&quot;,
+    &quot;from&quot;: &quot;watchdog&quot;, &quot;importance&quot;: 95, &quot;tone&quot;: &quot;error&quot;,
+    &quot;url&quot;: &quot;https://three.ws/dashboard&quot;, &quot;key&quot;: &quot;payments-worker-down&quot; } }
+
+// a long task finished, and it should not
+{ &quot;name&quot;: &quot;announce_result&quot;, &quot;arguments&quot;: {
+    &quot;task&quot;: &quot;the nightly backfill&quot;, &quot;outcome&quot;: &quot;succeeded&quot;, &quot;seconds&quot;: 1320 } }
+
+// wiring check
+{ &quot;name&quot;: &quot;check_rail&quot;, &quot;arguments&quot;: { &quot;note&quot;: &quot;claude-code&quot; } }
+</code></pre>
+<h2 id="how-it-reaches-a-browser"><a class="anchor" href="#how-it-reaches-a-browser" aria-label="Link to this section">#</a>How it reaches a browser</h2>
+<p><code>POST /api/herald/announce</code> queues the line on the account&#39;s rail; the page
+listens over SSE and hands it to <a href="https://www.npmjs.com/package/@three-ws/herald">@three-ws/herald</a>,
+which decides whether it clears the person&#39;s own rules and then delivers it
+through the 3D companion (or an accessible card when there is no GPU).</p>
+<p>Try the whole loop, including the rules engine, at
+<a href="https://three.ws/herald">three.ws/herald</a>.</p>
+<h2 id="license"><a class="anchor" href="#license" aria-label="Link to this section">#</a>License</h2>
+<p>Apache-2.0.</p>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#tools">Tools</a></li><li><a href="#install">Install</a></li><li><a href="#the-key">The key</a></li><li><a href="#when-to-use-it-and-when-not-to">When to use it (and when not to)</a></li><li><a href="#example-calls">Example calls</a></li><li><a href="#how-it-reaches-a-browser">How it reaches a browser</a></li><li><a href="#license">License</a></li></ul></nav>
+</div>
+<footer><div class="foot-in"><span>Apache-2.0 licensed</span><a href="https://github.com/nirholas/herald-mcp/issues">Issues</a><a href="https://github.com/nirholas/herald-mcp/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/nirholas/herald-mcp/security/policy">Security</a><a href="https://three.ws">Part of three.ws</a></div></footer>
+<script>document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+var t=b.getAttribute('data-copy');var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1400)};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}
+else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}a.remove()}})});</script>
+</body>
+</html>
